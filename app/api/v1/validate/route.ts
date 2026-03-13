@@ -82,7 +82,11 @@ export async function POST(request: Request) {
 
     const upstreamRes = await fetch(VALIDATOR_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/xml" },
+      headers: {
+        "Content-Type": "application/xml",
+        "CF-Access-Client-Id": process.env.CF_VALIDATOR_ACCESS_CLIENT_ID!,
+        "CF-Access-Client-Secret": process.env.CF_VALIDATOR_ACCESS_CLIENT_SECRET!,
+      },
       body: xmlBody,
       signal: controller.signal,
     })
