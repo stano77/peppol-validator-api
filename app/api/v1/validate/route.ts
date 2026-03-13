@@ -80,12 +80,6 @@ export async function POST(request: Request) {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), VALIDATOR_TIMEOUT_MS)
 
-    console.log("CF headers:", {
-      id: process.env.CF_VALIDATOR_ACCESS_CLIENT_ID?.slice(0, 8) + "...",
-      secretSet: !!process.env.CF_VALIDATOR_ACCESS_CLIENT_SECRET,
-      url: VALIDATOR_URL,
-    })
-
     const upstreamRes = await fetch(VALIDATOR_URL, {
       method: "POST",
       headers: {
