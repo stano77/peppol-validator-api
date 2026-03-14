@@ -99,7 +99,6 @@ export async function POST(request: Request) {
     clearTimeout(timeout)
     upstreamStatus = upstreamRes.status
     upstreamResult = await upstreamRes.json()
-    console.log("[v0] Upstream validation response:", JSON.stringify(upstreamResult, null, 2))
   } catch {
     const responseTimeMs = Date.now() - startTime
 

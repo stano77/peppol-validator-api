@@ -44,9 +44,14 @@ export interface QuotaInfo {
 }
 
 export interface ValidationResult {
-  valid: boolean
+  valid?: boolean
   error_count: number
   warning_count: number
+  // Upstream API returns flat arrays
+  errors?: ValidationError[]
+  warnings?: ValidationError[]
+  document_type?: string
+  // Legacy split format (if supported)
   xsd_errors?: ValidationError[]
   business_rule_errors?: ValidationError[]
   schematron_errors?: ValidationError[]
