@@ -180,7 +180,7 @@ export function LandingContent({
               Peppol Validator
             </span>
             <div className="flex items-center gap-3">
-              {user && quota && (
+              {user && quota && typeof quota.validations_today === 'number' && typeof quota.daily_limit === 'number' && (
                 <QuotaDisplay
                   used={quota.validations_today}
                   limit={quota.daily_limit}
@@ -285,7 +285,7 @@ export function LandingContent({
                   />
 
                   {/* Quota Display for logged in users */}
-                  {user && quota && (
+                  {user && quota && typeof quota.validations_today === 'number' && typeof quota.daily_limit === 'number' && (
                     <QuotaDisplay
                       used={quota.validations_today}
                       limit={quota.daily_limit}
