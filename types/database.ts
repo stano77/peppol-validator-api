@@ -21,8 +21,40 @@ export interface ApiKey {
 
 export interface ValidationLog {
   id: string
-  api_key_id: string
+  api_key_id: string | null
+  user_id: string | null
   status: string
   response_time_ms: number | null
   created_at: string
+}
+
+export interface UserQuota {
+  id: string
+  user_id: string
+  validations_today: number
+  last_reset_date: string
+  daily_limit: number
+  created_at: string
+}
+
+export interface QuotaInfo {
+  validations_today: number
+  daily_limit: number
+  remaining: number
+}
+
+export interface ValidationResult {
+  valid: boolean
+  error_count: number
+  warning_count: number
+  xsd_errors?: ValidationError[]
+  business_rule_errors?: ValidationError[]
+  schematron_errors?: ValidationError[]
+}
+
+export interface ValidationError {
+  rule_id?: string
+  location?: string
+  message: string
+  severity?: 'error' | 'warning'
 }
