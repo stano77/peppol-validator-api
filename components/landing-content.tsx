@@ -323,10 +323,6 @@ export function LandingContent({
 
                   {/* Sign in prompt for non-users */}
                   {!user && selectedFile && (
-                    <p className="text-center text-sm text-muted-foreground">
-                      Sign in required to validate. Free accounts get 50
-                      validations per day.
-                    </p>
                   )}
                 </div>
               </div>
