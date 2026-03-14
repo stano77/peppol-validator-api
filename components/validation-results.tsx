@@ -40,7 +40,15 @@ export function ValidationResults({
     })
   }
 
-  const isValid = result.valid && result.error_count === 0
+  // Handle potentially undefined/null values with defaults
+  const errorCount = result.error_count ?? 0
+  const warningCount = result.warning_count ?? 0
+  const isValid = result.valid === true && errorCount === 0
+
+  // Debug: log the result structure if it seems malformed
+  if (typeof result.valid === 'undefined' || typeof result.error_count === 'undefined') {
+    console.log("[v0] ValidationResults received malformed result:", JSON.stringify(result, null, 2))
+  }
 
   const sections = [
     {
@@ -93,9 +101,9 @@ export function ValidationResults({
             {isValid ? "Invoice is Valid" : "Validation Failed"}
           </h3>
           <p className="text-sm text-muted-foreground">
-            {result.error_count} error{result.error_count !== 1 ? "s" : ""},{" "}
-            {result.warning_count} warning
-            {result.warning_count !== 1 ? "s" : ""}
+            {errorCount} error{errorCount !== 1 ? "s" : ""},{" "}
+            {warningCount} warning
+            {warningCount !== 1 ? "s" : ""}
           </p>
         </div>
       </div>
