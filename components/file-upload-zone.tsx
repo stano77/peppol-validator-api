@@ -20,13 +20,16 @@ export function FileUploadZone({
 }: FileUploadZoneProps) {
   const [isDragging, setIsDragging] = useState(false)
 
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (!disabled) {
-      setIsDragging(true)
-    }
-  }, [disabled])
+  const handleDragOver = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      if (!disabled) {
+        setIsDragging(true)
+      }
+    },
+    [disabled]
+  )
 
   const handleDragLeave = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -72,12 +75,12 @@ export function FileUploadZone({
   return (
     <div
       className={cn(
-        "relative rounded-xl border-2 border-dashed transition-all duration-200",
+        "relative rounded-xl border-2 border-dashed transition-all duration-300",
         isDragging
-          ? "border-primary bg-primary/5"
+          ? "border-primary bg-primary/10 backdrop-blur-sm scale-[1.02]"
           : selectedFile
-            ? "border-primary/50 bg-primary/5"
-            : "border-border hover:border-primary/50 hover:bg-muted/50",
+            ? "border-primary/40 bg-primary/5 backdrop-blur-sm"
+            : "border-border/60 hover:border-primary/40 hover:bg-accent/30 backdrop-blur-sm",
         disabled && "cursor-not-allowed opacity-60",
         className
       )}
@@ -97,8 +100,8 @@ export function FileUploadZone({
       <div className="flex flex-col items-center justify-center gap-4 p-8 text-center">
         {selectedFile ? (
           <>
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-              <File className="h-7 w-7 text-primary" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15 ring-1 ring-primary/20 backdrop-blur-sm">
+              <File className="h-8 w-8 text-primary" />
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-base font-medium text-foreground">
@@ -114,7 +117,7 @@ export function FileUploadZone({
               size="sm"
               onClick={handleClear}
               disabled={disabled}
-              className="gap-1.5"
+              className="gap-1.5 hover:bg-destructive/10 hover:text-destructive"
             >
               <X className="h-4 w-4" />
               Remove file
@@ -124,13 +127,15 @@ export function FileUploadZone({
           <>
             <div
               className={cn(
-                "flex h-14 w-14 items-center justify-center rounded-full transition-colors",
-                isDragging ? "bg-primary/20" : "bg-muted"
+                "flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-300",
+                isDragging
+                  ? "bg-primary/20 ring-1 ring-primary/30 scale-110"
+                  : "bg-muted/50 ring-1 ring-border/50"
               )}
             >
               <Upload
                 className={cn(
-                  "h-7 w-7 transition-colors",
+                  "h-8 w-8 transition-colors duration-300",
                   isDragging ? "text-primary" : "text-muted-foreground"
                 )}
               />
@@ -143,7 +148,7 @@ export function FileUploadZone({
                 or click to browse files
               </p>
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground/80">
               Supports UBL 2.1 XML invoices up to 5MB
             </p>
           </>

@@ -68,24 +68,26 @@ export function ValidationResults({
       {/* Summary Card */}
       <div
         className={cn(
-          "flex flex-col items-center gap-4 rounded-xl p-8 text-center",
+          "flex flex-col items-center gap-4 rounded-2xl p-8 text-center backdrop-blur-sm",
           isValid
-            ? "bg-emerald-50 dark:bg-emerald-950/30"
-            : "bg-destructive/10"
+            ? "bg-emerald-500/10 ring-1 ring-emerald-500/20"
+            : "bg-destructive/10 ring-1 ring-destructive/20"
         )}
       >
         {isValid ? (
-          <CheckCircle2 className="h-16 w-16 text-emerald-600 dark:text-emerald-500" />
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15 ring-1 ring-emerald-500/25">
+            <CheckCircle2 className="h-10 w-10 text-emerald-500" />
+          </div>
         ) : (
-          <XCircle className="h-16 w-16 text-destructive" />
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-destructive/15 ring-1 ring-destructive/25">
+            <XCircle className="h-10 w-10 text-destructive" />
+          </div>
         )}
         <div className="flex flex-col gap-1">
           <h3
             className={cn(
               "text-2xl font-semibold",
-              isValid
-                ? "text-emerald-700 dark:text-emerald-400"
-                : "text-destructive"
+              isValid ? "text-emerald-600 dark:text-emerald-400" : "text-destructive"
             )}
           >
             {isValid ? "Invoice is Valid" : "Validation Failed"}
@@ -107,22 +109,26 @@ export function ValidationResults({
           return (
             <div
               key={section.id}
-              className="overflow-hidden rounded-lg border border-border"
+              className="overflow-hidden rounded-xl bg-card/50 backdrop-blur-sm ring-1 ring-border/50"
             >
               <button
                 type="button"
                 onClick={() => hasErrors && toggleSection(section.id)}
                 className={cn(
-                  "flex w-full items-center justify-between p-4 text-left transition-colors",
-                  hasErrors && "hover:bg-muted/50 cursor-pointer"
+                  "flex w-full items-center justify-between p-4 text-left transition-all duration-200",
+                  hasErrors && "hover:bg-accent/50 cursor-pointer"
                 )}
                 disabled={!hasErrors}
               >
                 <div className="flex items-center gap-3">
                   {hasErrors ? (
-                    <XCircle className="h-5 w-5 text-destructive" />
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-destructive/10">
+                      <XCircle className="h-5 w-5 text-destructive" />
+                    </div>
                   ) : (
-                    <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-500" />
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                    </div>
                   )}
                   <div className="flex flex-col gap-0.5">
                     <span className="font-medium text-foreground">
@@ -136,7 +142,7 @@ export function ValidationResults({
                 <div className="flex items-center gap-2">
                   {hasErrors && (
                     <>
-                      <span className="text-sm font-medium text-destructive">
+                      <span className="rounded-full bg-destructive/10 px-2.5 py-0.5 text-xs font-medium text-destructive">
                         {section.errors.length} issue
                         {section.errors.length !== 1 ? "s" : ""}
                       </span>
@@ -151,7 +157,7 @@ export function ValidationResults({
               </button>
 
               {hasErrors && isExpanded && (
-                <div className="border-t border-border bg-muted/30">
+                <div className="border-t border-border/50 bg-muted/20">
                   {section.errors.map((error, index) => (
                     <ErrorItem key={index} error={error} />
                   ))}
@@ -164,7 +170,11 @@ export function ValidationResults({
 
       {/* Action Button */}
       <div className="flex justify-center pt-2">
-        <Button onClick={onValidateAnother} variant="outline" className="gap-2">
+        <Button
+          onClick={onValidateAnother}
+          variant="outline"
+          className="gap-2 glass-subtle border-glass-border hover:bg-accent"
+        >
           <FileWarning className="h-4 w-4" />
           Validate Another Invoice
         </Button>
@@ -177,22 +187,26 @@ function ErrorItem({ error }: { error: ValidationError }) {
   const isWarning = error.severity === "warning"
 
   return (
-    <div className="border-b border-border/50 p-4 last:border-b-0">
+    <div className="border-b border-border/30 p-4 last:border-b-0">
       <div className="flex items-start gap-3">
         {isWarning ? (
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-500" />
+          <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-amber-500/10">
+            <AlertTriangle className="h-3.5 w-3.5 text-amber-500" />
+          </div>
         ) : (
-          <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+          <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-destructive/10">
+            <XCircle className="h-3.5 w-3.5 text-destructive" />
+          </div>
         )}
-        <div className="flex min-w-0 flex-col gap-1">
+        <div className="flex min-w-0 flex-col gap-1.5">
           {error.rule_id && (
-            <span className="font-mono text-xs font-medium text-muted-foreground">
+            <span className="inline-flex w-fit rounded-md bg-muted/50 px-2 py-0.5 font-mono text-xs font-medium text-muted-foreground">
               {error.rule_id}
             </span>
           )}
-          <p className="text-sm text-foreground">{error.message}</p>
+          <p className="text-sm text-foreground leading-relaxed">{error.message}</p>
           {error.location && (
-            <p className="break-all font-mono text-xs text-muted-foreground">
+            <p className="break-all rounded-md bg-muted/30 px-2 py-1 font-mono text-xs text-muted-foreground">
               {error.location}
             </p>
           )}

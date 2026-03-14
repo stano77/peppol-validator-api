@@ -8,6 +8,7 @@ import { FileUploadZone } from "@/components/file-upload-zone"
 import { QuotaDisplay } from "@/components/quota-display"
 import { ValidationResults } from "@/components/validation-results"
 import { AuthModal } from "@/components/auth-modal"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { createClient } from "@/lib/supabase/client"
 import type { User } from "@supabase/supabase-js"
 import type { Profile, QuotaInfo, ValidationResult } from "@/types/database"
@@ -160,80 +161,113 @@ export function LandingContent({
     selectedFile && (!user || (quota && quota.remaining > 0)) && !isValidating
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Gradient Mesh Background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-background" />
+        {/* Light mode gradient orbs */}
+        <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary/20 blur-[120px] dark:bg-primary/10" />
+        <div className="absolute -right-40 top-20 h-[400px] w-[400px] rounded-full bg-blue-400/20 blur-[100px] dark:bg-blue-500/10" />
+        <div className="absolute -bottom-40 left-1/3 h-[450px] w-[450px] rounded-full bg-cyan-400/15 blur-[110px] dark:bg-cyan-500/8" />
+        <div className="absolute bottom-1/4 right-1/4 h-[300px] w-[300px] rounded-full bg-indigo-400/15 blur-[80px] dark:bg-indigo-500/8" />
+      </div>
+
       {/* Navigation */}
-      <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-40">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <span className="text-lg font-bold text-foreground">
-            Peppol Validator
-          </span>
-          <div className="flex items-center gap-4">
-            {user && quota && (
-              <QuotaDisplay
-                used={quota.validations_today}
-                limit={quota.daily_limit}
-                variant="compact"
-              />
-            )}
-            {user ? (
-              <div className="flex items-center gap-3">
-                {profile?.avatar_url && (
-                  <img
-                    src={profile.avatar_url}
-                    alt=""
-                    className="h-8 w-8 rounded-full"
-                  />
-                )}
+      <nav className="sticky top-0 z-40 border-b border-glass-border">
+        <div className="glass-subtle">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+            <span className="text-lg font-semibold tracking-tight text-foreground">
+              Peppol Validator
+            </span>
+            <div className="flex items-center gap-3">
+              {user && quota && (
+                <QuotaDisplay
+                  used={quota.validations_today}
+                  limit={quota.daily_limit}
+                  variant="compact"
+                />
+              )}
+              <ThemeToggle />
+              {user ? (
+                <div className="flex items-center gap-3">
+                  {profile?.avatar_url && (
+                    <img
+                      src={profile.avatar_url}
+                      alt=""
+                      className="h-8 w-8 rounded-full ring-2 ring-glass-border"
+                    />
+                  )}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleSignOut}
+                    className="gap-1.5 hover:bg-accent"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign Out
+                  </Button>
+                </div>
+              ) : (
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="sm"
-                  onClick={handleSignOut}
-                  className="gap-1.5"
+                  onClick={() => setShowAuthModal(true)}
+                  className="glass-subtle border-glass-border hover:bg-accent"
                 >
-                  <LogOut className="h-4 w-4" />
-                  Sign Out
+                  Sign In
                 </Button>
-              </div>
-            ) : (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowAuthModal(true)}
-              >
-                Sign In
-              </Button>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </nav>
 
-      <main className="mx-auto max-w-5xl px-6 py-12">
+      <main className="relative mx-auto max-w-5xl px-6 py-16">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          transition={{ duration: 0.4 }}
-          className="flex flex-col gap-8"
+          transition={{ duration: 0.5 }}
+          className="flex flex-col gap-10"
         >
           {/* Hero Header */}
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl text-balance"
+            >
               Validate PEPPOL Invoices
-              <span className="text-primary"> Instantly</span>
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground text-pretty">
+              <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+                {" "}
+                Instantly
+              </span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground text-pretty"
+            >
               Full 3-layer validation: UBL 2.1 XSD schema, EN 16931 business
               rules, and Peppol BIS 3.0 Schematron. Get results in seconds.
-            </p>
+            </motion.p>
           </div>
 
           {/* Main Content Area */}
-          <div className="mx-auto w-full max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mx-auto w-full max-w-2xl"
+          >
             {validationResult ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
+                className="glass rounded-2xl p-6"
               >
                 <ValidationResults
                   result={validationResult}
@@ -241,78 +275,73 @@ export function LandingContent({
                 />
               </motion.div>
             ) : (
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="flex flex-col gap-6"
-              >
-                {/* Upload Zone */}
-                <FileUploadZone
-                  selectedFile={selectedFile}
-                  onFileSelect={setSelectedFile}
-                  disabled={isValidating}
-                />
-
-                {/* Quota Display for logged in users */}
-                {user && quota && (
-                  <QuotaDisplay
-                    used={quota.validations_today}
-                    limit={quota.daily_limit}
+              <div className="glass rounded-2xl p-6 md:p-8">
+                <div className="flex flex-col gap-6">
+                  {/* Upload Zone */}
+                  <FileUploadZone
+                    selectedFile={selectedFile}
+                    onFileSelect={setSelectedFile}
+                    disabled={isValidating}
                   />
-                )}
 
-                {/* Error Message */}
-                {error && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="rounded-lg bg-destructive/10 p-4 text-center text-sm text-destructive"
-                  >
-                    {error}
-                  </motion.div>
-                )}
-
-                {/* Validate Button */}
-                <Button
-                  size="lg"
-                  onClick={handleValidate}
-                  disabled={!canValidate}
-                  className="w-full gap-2 text-base"
-                >
-                  {isValidating ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      Validating...
-                    </>
-                  ) : (
-                    <>
-                      <FileCheck className="h-5 w-5" />
-                      Validate Invoice
-                    </>
+                  {/* Quota Display for logged in users */}
+                  {user && quota && (
+                    <QuotaDisplay
+                      used={quota.validations_today}
+                      limit={quota.daily_limit}
+                    />
                   )}
-                </Button>
 
-                {/* Sign in prompt for non-users */}
-                {!user && selectedFile && (
-                  <p className="text-center text-sm text-muted-foreground">
-                    Sign in required to validate. Free accounts get 50
-                    validations per day.
-                  </p>
-                )}
-              </motion.div>
+                  {/* Error Message */}
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="rounded-xl bg-destructive/10 backdrop-blur-sm p-4 text-center text-sm text-destructive border border-destructive/20"
+                    >
+                      {error}
+                    </motion.div>
+                  )}
+
+                  {/* Validate Button */}
+                  <Button
+                    size="lg"
+                    onClick={handleValidate}
+                    disabled={!canValidate}
+                    className="w-full gap-2 text-base font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                  >
+                    {isValidating ? (
+                      <>
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        Validating...
+                      </>
+                    ) : (
+                      <>
+                        <FileCheck className="h-5 w-5" />
+                        Validate Invoice
+                      </>
+                    )}
+                  </Button>
+
+                  {/* Sign in prompt for non-users */}
+                  {!user && selectedFile && (
+                    <p className="text-center text-sm text-muted-foreground">
+                      Sign in required to validate. Free accounts get 50
+                      validations per day.
+                    </p>
+                  )}
+                </div>
+              </div>
             )}
-          </div>
+          </motion.div>
 
           {/* Features Section - only show when no validation result */}
           {!validationResult && (
             <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-8 grid gap-4 md:grid-cols-3"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-4 grid gap-4 md:grid-cols-3"
             >
               {[
                 {
@@ -330,23 +359,26 @@ export function LandingContent({
                   title: "Detailed Reports",
                   desc: "Clear error messages with rule IDs and exact locations.",
                 },
-              ].map((item) => (
-                <div
+              ].map((item, i) => (
+                <motion.div
                   key={item.title}
-                  className="flex flex-col gap-3 rounded-xl border border-border bg-card p-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+                  className="glass rounded-2xl p-6"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
                     <item.icon className="h-5 w-5" />
                   </div>
-                  <div>
+                  <div className="mt-4">
                     <h3 className="font-semibold text-foreground">
                       {item.title}
                     </h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
+                    <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           )}
@@ -354,9 +386,11 @@ export function LandingContent({
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8">
-        <div className="mx-auto max-w-5xl px-6 text-center text-sm text-muted-foreground">
-          Peppol Validator API
+      <footer className="relative border-t border-glass-border">
+        <div className="glass-subtle py-8">
+          <div className="mx-auto max-w-5xl px-6 text-center text-sm text-muted-foreground">
+            Peppol Validator API
+          </div>
         </div>
       </footer>
 
