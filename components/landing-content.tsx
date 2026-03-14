@@ -344,7 +344,7 @@ export function LandingContent({
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Please only validate <span className="font-medium text-foreground">test invoices</span>, not real production documents containing sensitive data.
-                    The <Sparkles className="inline h-4 w-4 text-primary" /> AI assistant uses invoice content to help identify validation errors and suggest fixes.
+                    The <Sparkles className="inline h-4 w-4 text-primary" /> AI assistant uses invoice content to help explain validation errors and suggest fixes.
                   </p>
 
                 </div>
