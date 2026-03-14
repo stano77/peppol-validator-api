@@ -1,0 +1,32 @@
+# robots.txt for peppol-validator.eu
+# Optimized for search engine crawling
+
+User-agent: *
+Allow: /
+
+# Disallow API endpoints and auth pages from indexing
+Disallow: /api/
+Disallow: /auth/
+Disallow: /dashboard/
+
+# Allow specific public assets
+Allow: /og-image.png
+Allow: /logo.png
+
+# Sitemap location
+Sitemap: https://peppol-validator.eu/sitemap.xml
+
+# Crawl-delay for respectful crawling (optional)
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /auth/

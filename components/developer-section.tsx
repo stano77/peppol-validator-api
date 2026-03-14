@@ -231,9 +231,9 @@ print(result)`
             <div className="pt-4 space-y-6">
               {/* API Key Management */}
               <div className="glass rounded-2xl p-4 sm:p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <Key className="h-4 w-4 text-primary" />
-                  <h4 className="font-semibold text-foreground">API Credentials</h4>
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <Key className="h-4 w-4 text-primary shrink-0" />
+                  <h4 className="font-semibold text-foreground text-sm sm:text-base">API Credentials</h4>
                 </div>
 
                 {!user ? (
@@ -251,17 +251,19 @@ print(result)`
                       {/* API Key */}
                       <div>
                         <label className="text-xs font-medium text-muted-foreground mb-1.5 block">API Key</label>
-                        <div className="flex items-center gap-2">
-                          <code className="flex-1 rounded-lg bg-muted/50 px-2 sm:px-3 py-2 text-xs sm:text-sm font-mono truncate min-w-0">
-                            {apiKey.key}
-                          </code>
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <div className="flex-1 min-w-0 overflow-hidden">
+                            <code className="block rounded-lg bg-muted/50 px-2 py-2 text-[10px] sm:text-xs font-mono truncate">
+                              {apiKey.key}
+                            </code>
+                          </div>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 shrink-0"
+                            className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
                             onClick={() => copyToClipboard(apiKey.key, "key")}
                           >
-                            {copiedField === "key" ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                            {copiedField === "key" ? <Check className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" /> : <Copy className="h-3 w-3 sm:h-4 sm:w-4" />}
                           </Button>
                         </div>
                       </div>
@@ -272,35 +274,37 @@ print(result)`
                         {apiSecret ? (
                           <div className="space-y-2">
                             <div className="flex items-center gap-1 sm:gap-2">
-                              <code className="flex-1 rounded-lg bg-muted/50 px-2 sm:px-3 py-2 text-xs sm:text-sm font-mono truncate min-w-0">
-                                {showSecret ? apiSecret : "•".repeat(20)}
-                              </code>
+                              <div className="flex-1 min-w-0 overflow-hidden">
+                                <code className="block rounded-lg bg-muted/50 px-2 py-2 text-[10px] sm:text-xs font-mono truncate">
+                                  {showSecret ? apiSecret : "•".repeat(16)}
+                                </code>
+                              </div>
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
+                                className="h-7 w-7 shrink-0"
                                 onClick={() => setShowSecret(!showSecret)}
                               >
-                                {showSecret ? <EyeOff className="h-3 w-3 sm:h-4 sm:w-4" /> : <Eye className="h-3 w-3 sm:h-4 sm:w-4" />}
+                                {showSecret ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
                               </Button>
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
+                                className="h-7 w-7 shrink-0"
                                 onClick={() => copyToClipboard(apiSecret, "secret")}
                               >
-                                {copiedField === "secret" ? <Check className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" /> : <Copy className="h-3 w-3 sm:h-4 sm:w-4" />}
+                                {copiedField === "secret" ? <Check className="h-3 w-3 text-green-500" /> : <Copy className="h-3 w-3" />}
                               </Button>
                             </div>
                             <div className="flex items-start gap-2 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                              <AlertCircle className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
-                              <p className="text-xs text-amber-600 dark:text-amber-400">
-                                Save this secret now. It won't be shown again after you leave this page.
+                              <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4 text-amber-500 shrink-0 mt-0.5" />
+                              <p className="text-[10px] sm:text-xs text-amber-600 dark:text-amber-400 leading-relaxed">
+                                Save this secret now. It won't be shown again.
                               </p>
                             </div>
                           </div>
                         ) : (
-                          <p className="text-sm text-muted-foreground italic">
+                          <p className="text-xs sm:text-sm text-muted-foreground italic">
                             Secret hidden. Regenerate key to get a new secret.
                           </p>
                         )}
@@ -352,9 +356,9 @@ print(result)`
 
               {/* Code Snippets */}
               <div className="glass rounded-2xl p-4 sm:p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <Terminal className="h-4 w-4 text-primary" />
-                  <h4 className="font-semibold text-foreground">Integration</h4>
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <Terminal className="h-4 w-4 text-primary shrink-0" />
+                  <h4 className="font-semibold text-foreground text-sm sm:text-base">Integration</h4>
                 </div>
 
                 {/* Language Tabs */}
@@ -394,9 +398,9 @@ print(result)`
               {/* API Playground */}
               {apiKey && apiSecret && (
                 <div className="glass rounded-2xl p-4 sm:p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Play className="h-4 w-4 text-primary" />
-                    <h4 className="font-semibold text-foreground">API Playground</h4>
+                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                    <Play className="h-4 w-4 text-primary shrink-0" />
+                    <h4 className="font-semibold text-foreground text-sm sm:text-base">API Playground</h4>
                   </div>
 
                   <div className="space-y-4">
@@ -407,7 +411,7 @@ print(result)`
                       <textarea
                         value={testXml}
                         onChange={(e) => setTestXml(e.target.value)}
-                        className="w-full h-32 rounded-lg bg-muted/50 px-3 py-2 text-sm font-mono resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        className="w-full h-24 sm:h-32 rounded-lg bg-muted/50 px-2 sm:px-3 py-2 text-[10px] sm:text-xs md:text-sm font-mono resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
                         placeholder="Paste your UBL XML here..."
                       />
                     </div>
@@ -415,12 +419,13 @@ print(result)`
                     <Button
                       onClick={runPlayground}
                       disabled={isPlaygroundLoading}
-                      className="gap-2"
+                      size="sm"
+                      className="gap-1.5 text-xs sm:text-sm"
                     >
                       {isPlaygroundLoading ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
                       ) : (
-                        <Play className="h-4 w-4" />
+                        <Play className="h-3 w-3 sm:h-4 sm:w-4" />
                       )}
                       Send Request
                     </Button>
@@ -440,13 +445,13 @@ print(result)`
               )}
 
               {/* API Documentation Link */}
-              <div className="text-center text-xs sm:text-sm text-muted-foreground px-2">
+              <div className="text-center text-[10px] sm:text-xs text-muted-foreground px-1">
                 <p className="leading-relaxed">
-                  POST to <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-xs">/api/v1/validate</code>
+                  POST to <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-[10px] sm:text-xs">/api/v1/validate</code>
                 </p>
                 <p className="mt-1 leading-relaxed">
-                  with headers <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-xs">X-API-Key</code> and{" "}
-                  <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-xs">X-API-Secret</code>
+                  Headers: <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-[10px] sm:text-xs">X-API-Key</code>{" "}
+                  <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-[10px] sm:text-xs">X-API-Secret</code>
                 </p>
               </div>
             </div>
