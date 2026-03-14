@@ -230,7 +230,7 @@ print(result)`
           >
             <div className="pt-4 space-y-6">
               {/* API Key Management */}
-              <div className="glass rounded-2xl p-5">
+              <div className="glass rounded-2xl p-4 sm:p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <Key className="h-4 w-4 text-primary" />
                   <h4 className="font-semibold text-foreground">API Credentials</h4>
@@ -252,7 +252,7 @@ print(result)`
                       <div>
                         <label className="text-xs font-medium text-muted-foreground mb-1.5 block">API Key</label>
                         <div className="flex items-center gap-2">
-                          <code className="flex-1 rounded-lg bg-muted/50 px-3 py-2 text-sm font-mono truncate">
+                          <code className="flex-1 rounded-lg bg-muted/50 px-2 sm:px-3 py-2 text-xs sm:text-sm font-mono truncate min-w-0">
                             {apiKey.key}
                           </code>
                           <Button
@@ -271,25 +271,25 @@ print(result)`
                         <label className="text-xs font-medium text-muted-foreground mb-1.5 block">API Secret</label>
                         {apiSecret ? (
                           <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                              <code className="flex-1 rounded-lg bg-muted/50 px-3 py-2 text-sm font-mono truncate">
-                                {showSecret ? apiSecret : "•".repeat(32)}
+                            <div className="flex items-center gap-1 sm:gap-2">
+                              <code className="flex-1 rounded-lg bg-muted/50 px-2 sm:px-3 py-2 text-xs sm:text-sm font-mono truncate min-w-0">
+                                {showSecret ? apiSecret : "•".repeat(20)}
                               </code>
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 shrink-0"
+                                className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
                                 onClick={() => setShowSecret(!showSecret)}
                               >
-                                {showSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                {showSecret ? <EyeOff className="h-3 w-3 sm:h-4 sm:w-4" /> : <Eye className="h-3 w-3 sm:h-4 sm:w-4" />}
                               </Button>
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 shrink-0"
+                                className="h-7 w-7 sm:h-8 sm:w-8 shrink-0"
                                 onClick={() => copyToClipboard(apiSecret, "secret")}
                               >
-                                {copiedField === "secret" ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                                {copiedField === "secret" ? <Check className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" /> : <Copy className="h-3 w-3 sm:h-4 sm:w-4" />}
                               </Button>
                             </div>
                             <div className="flex items-start gap-2 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
@@ -308,7 +308,7 @@ print(result)`
                     </div>
 
                     {/* Usage & Actions */}
-                    <div className="flex items-center justify-between pt-2 border-t border-border/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-border/50">
                       <div className="flex items-center gap-2">
                         <Badge variant="outline" className="text-xs">
                           {apiKey.usage_count} / {apiKey.max_usage} requests
@@ -320,17 +320,18 @@ print(result)`
                           size="sm"
                           onClick={createApiKey}
                           disabled={isCreating}
-                          className="gap-1.5"
+                          className="gap-1.5 flex-1 sm:flex-none"
                         >
                           {isCreating ? <Loader2 className="h-3 w-3 animate-spin" /> : <RefreshCw className="h-3 w-3" />}
-                          Regenerate
+                          <span className="hidden xs:inline">Regenerate</span>
+                          <span className="xs:hidden">New</span>
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={revokeApiKey}
                           disabled={isDeleting}
-                          className="text-destructive hover:text-destructive gap-1.5"
+                          className="text-destructive hover:text-destructive gap-1.5 flex-1 sm:flex-none"
                         >
                           {isDeleting ? <Loader2 className="h-3 w-3 animate-spin" /> : <Trash2 className="h-3 w-3" />}
                           Revoke
@@ -350,19 +351,19 @@ print(result)`
               </div>
 
               {/* Code Snippets */}
-              <div className="glass rounded-2xl p-5">
+              <div className="glass rounded-2xl p-4 sm:p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <Terminal className="h-4 w-4 text-primary" />
                   <h4 className="font-semibold text-foreground">Integration</h4>
                 </div>
 
                 {/* Language Tabs */}
-                <div className="flex gap-1 p-1 bg-muted/50 rounded-lg mb-4 w-fit">
+                <div className="flex gap-1 p-1 bg-muted/50 rounded-lg mb-4 w-full sm:w-fit overflow-x-auto">
                   {(["curl", "nodejs", "python"] as const).map((lang) => (
                     <button
                       key={lang}
                       onClick={() => setSelectedLanguage(lang)}
-                      className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${selectedLanguage === lang
+                      className={`px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap flex-1 sm:flex-none ${selectedLanguage === lang
                           ? "bg-background text-foreground shadow-sm"
                           : "text-muted-foreground hover:text-foreground"
                         }`}
@@ -374,25 +375,25 @@ print(result)`
 
                 {/* Code Block */}
                 <div className="relative">
-                  <pre className="rounded-lg bg-muted/50 p-4 text-sm overflow-x-auto">
-                    <code className="text-foreground font-mono whitespace-pre">
+                  <pre className="rounded-lg bg-muted/50 p-3 sm:p-4 text-xs sm:text-sm overflow-x-auto max-w-full">
+                    <code className="text-foreground font-mono whitespace-pre break-all sm:break-normal">
                       {getCodeSnippet(selectedLanguage)}
                     </code>
                   </pre>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-2 right-2 h-8 w-8"
+                    className="absolute top-1 right-1 sm:top-2 sm:right-2 h-7 w-7 sm:h-8 sm:w-8"
                     onClick={() => copyToClipboard(getCodeSnippet(selectedLanguage), "code")}
                   >
-                    {copiedField === "code" ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                    {copiedField === "code" ? <Check className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" /> : <Copy className="h-3 w-3 sm:h-4 sm:w-4" />}
                   </Button>
                 </div>
               </div>
 
               {/* API Playground */}
               {apiKey && apiSecret && (
-                <div className="glass rounded-2xl p-5">
+                <div className="glass rounded-2xl p-4 sm:p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Play className="h-4 w-4 text-primary" />
                     <h4 className="font-semibold text-foreground">API Playground</h4>
@@ -439,11 +440,13 @@ print(result)`
               )}
 
               {/* API Documentation Link */}
-              <div className="text-center text-sm text-muted-foreground">
-                <p>
-                  POST to <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground">/api/v1/validate</code> with
-                  headers <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground">X-API-Key</code> and
-                  <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground ml-1">X-API-Secret</code>
+              <div className="text-center text-xs sm:text-sm text-muted-foreground px-2">
+                <p className="leading-relaxed">
+                  POST to <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-xs">/api/v1/validate</code>
+                </p>
+                <p className="mt-1 leading-relaxed">
+                  with headers <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-xs">X-API-Key</code> and{" "}
+                  <code className="px-1 py-0.5 rounded bg-muted/50 text-foreground text-xs">X-API-Secret</code>
                 </p>
               </div>
             </div>
