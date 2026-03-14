@@ -1,6 +1,7 @@
 import { streamText } from "ai"
 import { createClient } from "@/lib/supabase/server"
 
+// AI-powered error analysis endpoint
 export async function POST(request: Request) {
   const supabase = await createClient()
 
