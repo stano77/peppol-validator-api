@@ -352,7 +352,7 @@ export function LandingContent({
                     The <Sparkles className="inline h-4 w-4 text-primary" /> AI assistant uses invoice content to help identify validation errors and suggest fixes.
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Need more than 50 validations per day? Contact me at{" "}
+                    Need increase quota per day? Contact me at{" "}
                     <a
                       href="mailto:stanislav.pavlovic1 I am using gmail"
                       className="font-medium text-primary hover:underline"
