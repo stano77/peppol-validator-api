@@ -321,9 +321,7 @@ export function LandingContent({
                     )}
                   </Button>
 
-                  {/* Sign in prompt for non-users */}
-                  {!user && selectedFile && (
-                  )}
+
                 </div>
               </div>
             )}
