@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { motion } from "framer-motion"
-import { Shield, Zap, FileCheck, Loader2, LogOut } from "lucide-react"
+import { Shield, FileCheck, Loader2, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FileUploadZone } from "@/components/file-upload-zone"
 import { QuotaDisplay } from "@/components/quota-display"
@@ -340,53 +340,37 @@ export function LandingContent({
             )}
           </motion.div>
 
-          {/* Features Section - only show when no validation result */}
-          {!validationResult && (
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-4 grid gap-4 md:grid-cols-3"
-            >
-              {[
-                {
-                  icon: Shield,
-                  title: "3-Layer Validation",
-                  desc: "XSD schema, EN 16931 rules, and Peppol Schematron in one request.",
-                },
-                {
-                  icon: Zap,
-                  title: "Instant Results",
-                  desc: "Get comprehensive validation results in seconds, not minutes.",
-                },
-                {
-                  icon: FileCheck,
-                  title: "Detailed Reports",
-                  desc: "Clear error messages with rule IDs and exact locations.",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-                  className="glass rounded-2xl p-6"
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <div className="mt-4">
-                    <h3 className="font-semibold text-foreground">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
+          {/* Disclaimer Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-4 mx-auto max-w-2xl"
+          >
+            <div className="glass-subtle rounded-2xl p-6 border border-amber-500/20 bg-amber-500/5">
+              <div className="flex gap-3">
+                <Shield className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-foreground">
+                    Important Notice
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Please only validate <span className="font-medium text-foreground">test invoices</span>, not real production documents containing sensitive data.
+                    The AI assistant uses invoice content to help identify validation errors and suggest fixes.
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Need more than 50 validations per day? Contact us at{" "}
+                    <a
+                      href="mailto:stanislav.pavlovicOne(use digit) and I am using gmail"
+                      className="font-medium text-primary hover:underline"
+                    >
+                      stanislav.pavlovicOne(use digit) and I am using gmail
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       </main>
 
