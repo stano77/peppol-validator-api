@@ -345,15 +345,7 @@ export function LandingContent({
                     Please only validate <span className="font-medium text-foreground">test invoices</span>, not real production documents containing sensitive data.
                     The <Sparkles className="inline h-4 w-4 text-primary" /> AI assistant uses invoice content to help identify validation errors and suggest fixes.
                   </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Need increase quota per day? Contact me at{" "}
-                    <a
-                      href="mailto:stanislav.pavlovic1 I am using gmail"
-                      className="font-medium text-primary hover:underline"
-                    >
-                      stanislav.pavlovic1 I am using g-mail
-                    </a>
-                  </p>
+
                 </div>
               </div>
             </div>
