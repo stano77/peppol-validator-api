@@ -182,7 +182,7 @@ export function LandingContent({
         <div className="glass-subtle">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
             <span className="text-lg font-semibold tracking-tight text-foreground">
-              Peppol Validator
+              peppol-validator.eu
             </span>
             <div className="flex items-center gap-3">
               {user && quota && typeof quota.validations_today === 'number' && typeof quota.daily_limit === 'number' && (
@@ -248,6 +248,7 @@ export function LandingContent({
                 {" "}
                 Instantly
               </span>
+              <sup className="ml-2 text-xs sm:text-sm font-semibold text-primary align-super">Beta</sup>
             </motion.h1>
 
           </div>

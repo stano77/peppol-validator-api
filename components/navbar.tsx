@@ -19,7 +19,7 @@ export function Navbar() {
     <nav className="border-b border-border bg-card">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
         <Link href="/dashboard" className="text-lg font-bold text-foreground">
-          Peppol Validator API
+          peppol-validator.eu
         </Link>
         <Button variant="ghost" size="sm" onClick={handleSignOut} className="gap-2">
           <LogOut size={16} />
