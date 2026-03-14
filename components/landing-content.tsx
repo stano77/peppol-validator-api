@@ -360,12 +360,12 @@ export function LandingContent({
                     The AI assistant uses invoice content to help identify validation errors and suggest fixes.
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Need more than 50 validations per day? Contact us at{" "}
+                    Need more than 50 validations per day? Contact me at{" "}
                     <a
-                      href="mailto:stanislav.pavlovic1@gmail.com"
+                      href="mailto:stanislav.pavlovic1 I am using gmail"
                       className="font-medium text-primary hover:underline"
                     >
-                      stanislav.pavlovic1@gmail.com
+                      stanislav.pavlovic1 I am using g-mail
                     </a>
                   </p>
                 </div>
@@ -374,9 +374,9 @@ export function LandingContent({
           </motion.div>
 
           {/* Developer Section - Collapsible */}
-          <DeveloperSection 
-            user={user} 
-            onAuthRequired={() => setShowAuthModal(true)} 
+          <DeveloperSection
+            user={user}
+            onAuthRequired={() => setShowAuthModal(true)}
           />
         </motion.div>
       </main>
