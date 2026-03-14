@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { motion } from "framer-motion"
-import { Shield, FileCheck, Loader2, LogOut, Sparkles } from "lucide-react"
+import { Shield, FileCheck, Loader2, LogOut, Sparkles, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FileUploadZone } from "@/components/file-upload-zone"
 import { QuotaDisplay } from "@/components/quota-display"
@@ -376,8 +376,16 @@ export function LandingContent({
       {/* Footer */}
       <footer className="relative border-t border-glass-border">
         <div className="glass-subtle py-8">
-          <div className="mx-auto max-w-5xl px-6 text-center text-sm text-muted-foreground">
-            Peppol Validator API
+          <div className="mx-auto max-w-5xl px-6 flex justify-center">
+            <a
+              href="https://github.com/stano77/peppol-validator-api"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="View source on GitHub"
+            >
+              <Github className="h-6 w-6" />
+            </a>
           </div>
         </div>
       </footer>

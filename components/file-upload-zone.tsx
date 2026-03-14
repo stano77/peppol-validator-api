@@ -148,9 +148,6 @@ export function FileUploadZone({
                 or click to browse files
               </p>
             </div>
-            <p className="text-xs text-muted-foreground/80">
-              Supports UBL 2.1 XML invoices up to 5MB
-            </p>
           </>
         )}
       </div>
