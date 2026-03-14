@@ -364,7 +364,7 @@ export function LandingContent({
                       href="mailto:stanislav.pavlovicOne(use digit) and I am using gmail"
                       className="font-medium text-primary hover:underline"
                     >
-                      stanislav.pavlovicOne(use digit) and I am using gmail
+                      stanislav.pavlovicOne(use digit) and I am using gmail :)
                     </a>
                   </p>
                 </div>
