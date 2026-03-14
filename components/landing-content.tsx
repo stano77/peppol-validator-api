@@ -9,6 +9,7 @@ import { QuotaDisplay } from "@/components/quota-display"
 import { ValidationResults } from "@/components/validation-results"
 import { AuthModal } from "@/components/auth-modal"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { DeveloperSection } from "@/components/developer-section"
 import { createClient } from "@/lib/supabase/client"
 import type { User } from "@supabase/supabase-js"
 import type { Profile, QuotaInfo, ValidationResult } from "@/types/database"
@@ -361,16 +362,22 @@ export function LandingContent({
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Need more than 50 validations per day? Contact us at{" "}
                     <a
-                      href="mailto:stanislav.pavlovicOne(use digit) and I am using gmail"
+                      href="mailto:stanislav.pavlovic1@gmail.com"
                       className="font-medium text-primary hover:underline"
                     >
-                      stanislav.pavlovicOne(use digit) and I am using gmail :)
+                      stanislav.pavlovic1@gmail.com
                     </a>
                   </p>
                 </div>
               </div>
             </div>
           </motion.div>
+
+          {/* Developer Section - Collapsible */}
+          <DeveloperSection 
+            user={user} 
+            onAuthRequired={() => setShowAuthModal(true)} 
+          />
         </motion.div>
       </main>
 
