@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { motion } from "framer-motion"
-import { Shield, FileCheck, Loader2, LogOut } from "lucide-react"
+import { Shield, FileCheck, Loader2, LogOut, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FileUploadZone } from "@/components/file-upload-zone"
 import { QuotaDisplay } from "@/components/quota-display"
@@ -249,15 +249,7 @@ export function LandingContent({
                 Instantly
               </span>
             </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground text-pretty"
-            >
-              Full 3-layer validation: UBL 2.1 XSD schema, EN 16931 business
-              rules, and Peppol BIS 3.0 Schematron. Get results in seconds.
-            </motion.p>
+
           </div>
 
           {/* Main Content Area */}
@@ -357,7 +349,7 @@ export function LandingContent({
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Please only validate <span className="font-medium text-foreground">test invoices</span>, not real production documents containing sensitive data.
-                    The AI assistant uses invoice content to help identify validation errors and suggest fixes.
+                    The <Sparkles className="inline h-4 w-4 text-primary" /> AI assistant uses invoice content to help identify validation errors and suggest fixes.
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Need more than 50 validations per day? Contact me at{" "}

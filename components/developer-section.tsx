@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { 
-  ChevronDown, 
-  Code2, 
-  Key, 
-  Copy, 
-  Check, 
-  RefreshCw, 
+import {
+  ChevronDown,
+  Code2,
+  Key,
+  Copy,
+  Check,
+  RefreshCw,
   Trash2,
   Play,
   Terminal,
@@ -48,7 +48,7 @@ export function DeveloperSection({ user, onAuthRequired }: DeveloperSectionProps
   const [isDeleting, setIsDeleting] = useState(false)
   const [copiedField, setCopiedField] = useState<string | null>(null)
   const [selectedLanguage, setSelectedLanguage] = useState<CodeLanguage>("curl")
-  
+
   // API Playground state
   const [testXml, setTestXml] = useState(`<?xml version="1.0" encoding="UTF-8"?>
 <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
@@ -81,7 +81,7 @@ export function DeveloperSection({ user, onAuthRequired }: DeveloperSectionProps
       onAuthRequired()
       return
     }
-    
+
     setIsCreating(true)
     try {
       const res = await fetch("/api/v1/keys", { method: "POST" })
@@ -122,10 +122,10 @@ export function DeveloperSection({ user, onAuthRequired }: DeveloperSectionProps
       setPlaygroundResult("Error: API key and secret required. Create one above.")
       return
     }
-    
+
     setIsPlaygroundLoading(true)
     setPlaygroundResult(null)
-    
+
     try {
       const res = await fetch("/api/v1/validate", {
         method: "POST",
@@ -138,7 +138,7 @@ export function DeveloperSection({ user, onAuthRequired }: DeveloperSectionProps
       })
       const data = await res.json()
       setPlaygroundResult(JSON.stringify(data, null, 2))
-      
+
       // Refresh key to get updated usage
       fetchApiKey()
     } catch (error) {
@@ -151,7 +151,7 @@ export function DeveloperSection({ user, onAuthRequired }: DeveloperSectionProps
   const getCodeSnippet = (lang: CodeLanguage): string => {
     const key = apiKey?.key || "YOUR_API_KEY"
     const secret = apiSecret || "YOUR_API_SECRET"
-    
+
     switch (lang) {
       case "curl":
         return `curl -X POST \\
@@ -160,7 +160,7 @@ export function DeveloperSection({ user, onAuthRequired }: DeveloperSectionProps
   -H "X-API-Key: ${key}" \\
   -H "X-API-Secret: ${secret}" \\
   -d @invoice.xml`
-      
+
       case "nodejs":
         return `const response = await fetch("${typeof window !== 'undefined' ? window.location.origin : 'https://your-domain.com'}/api/v1/validate", {
   method: "POST",
@@ -174,7 +174,7 @@ export function DeveloperSection({ user, onAuthRequired }: DeveloperSectionProps
 
 const result = await response.json();
 console.log(result);`
-      
+
       case "python":
         return `import requests
 
@@ -190,7 +190,7 @@ response = requests.post(
 
 result = response.json()
 print(result)`
-      
+
       default:
         return ""
     }
@@ -213,7 +213,7 @@ print(result)`
           </div>
           <div className="text-left">
             <h3 className="font-semibold text-foreground">For Developers</h3>
-            <p className="text-sm text-muted-foreground">API access, documentation & code snippets</p>
+            <p className="text-sm text-muted-foreground">API access for build or run time validation</p>
           </div>
         </div>
         <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
@@ -362,11 +362,10 @@ print(result)`
                     <button
                       key={lang}
                       onClick={() => setSelectedLanguage(lang)}
-                      className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                        selectedLanguage === lang
+                      className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${selectedLanguage === lang
                           ? "bg-background text-foreground shadow-sm"
                           : "text-muted-foreground hover:text-foreground"
-                      }`}
+                        }`}
                     >
                       {lang === "curl" ? "cURL" : lang === "nodejs" ? "Node.js" : "Python"}
                     </button>
@@ -442,8 +441,8 @@ print(result)`
               {/* API Documentation Link */}
               <div className="text-center text-sm text-muted-foreground">
                 <p>
-                  POST to <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground">/api/v1/validate</code> with 
-                  headers <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground">X-API-Key</code> and 
+                  POST to <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground">/api/v1/validate</code> with
+                  headers <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground">X-API-Key</code> and
                   <code className="px-1.5 py-0.5 rounded bg-muted/50 text-foreground ml-1">X-API-Secret</code>
                 </p>
               </div>
