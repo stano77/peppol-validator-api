@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import React, { useState, useCallback } from "react"
 import { Sparkles, Loader2, Copy, Check, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -99,7 +99,7 @@ export function AIAssistant({
   // Parse markdown to render with proper formatting
   const renderMarkdown = (content: string) => {
     const lines = content.split("\n")
-    const elements: JSX.Element[] = []
+    const elements: React.ReactNode[] = []
     let inCodeBlock = false
     let codeBlockContent = ""
     let codeBlockLang = ""
@@ -229,7 +229,7 @@ export function AIAssistant({
 
   // Render inline markdown (bold, code, etc)
   const renderInlineMarkdown = (text: string) => {
-    const parts: (string | JSX.Element)[] = []
+    const parts: React.ReactNode[] = []
     let remaining = text
     let keyIndex = 0
 
