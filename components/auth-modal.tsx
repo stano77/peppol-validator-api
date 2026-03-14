@@ -35,10 +35,6 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
       <DialogContent className="sm:max-w-md glass-heavy border-glass-border" showCloseButton={true}>
         <DialogHeader className="text-center">
           <DialogTitle className="text-xl font-semibold">Sign in to validate</DialogTitle>
-          <DialogDescription className="text-muted-foreground">
-            Create a free account to validate your invoices. You get 50 free
-            validations per day.
-          </DialogDescription>
         </DialogHeader>
 
         <div className="flex flex-col gap-3 pt-4">
@@ -78,10 +74,6 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
             <span className="font-medium">Continue with Apple</span>
           </Button>
         </div>
-
-        <p className="text-center text-xs text-muted-foreground/80 pt-4">
-          By signing in, you agree to our Terms of Service and Privacy Policy.
-        </p>
       </DialogContent>
     </Dialog>
   )
