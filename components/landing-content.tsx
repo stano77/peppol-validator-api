@@ -243,7 +243,7 @@ export function LandingContent({
               transition={{ duration: 0.6 }}
               className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl text-balance"
             >
-              Validate PEPPOL Invoices
+              Validate Invoices
               <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
                 {" "}
                 Instantly
