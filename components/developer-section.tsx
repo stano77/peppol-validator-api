@@ -201,7 +201,7 @@ print(result)`
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.5 }}
-      className="mx-auto max-w-2xl"
+      className="mx-auto max-w-2xl px-1"
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
@@ -320,18 +320,18 @@ print(result)`
                           size="sm"
                           onClick={createApiKey}
                           disabled={isCreating}
-                          className="gap-1.5 flex-1 sm:flex-none"
+                          className="gap-1.5 flex-1 sm:flex-none text-xs sm:text-sm"
                         >
                           {isCreating ? <Loader2 className="h-3 w-3 animate-spin" /> : <RefreshCw className="h-3 w-3" />}
-                          <span className="hidden xs:inline">Regenerate</span>
-                          <span className="xs:hidden">New</span>
+                          <span className="hidden sm:inline">Regenerate</span>
+                          <span className="sm:hidden">New</span>
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={revokeApiKey}
                           disabled={isDeleting}
-                          className="text-destructive hover:text-destructive gap-1.5 flex-1 sm:flex-none"
+                          className="text-destructive hover:text-destructive gap-1.5 flex-1 sm:flex-none text-xs sm:text-sm"
                         >
                           {isDeleting ? <Loader2 className="h-3 w-3 animate-spin" /> : <Trash2 className="h-3 w-3" />}
                           Revoke
@@ -374,9 +374,9 @@ print(result)`
                 </div>
 
                 {/* Code Block */}
-                <div className="relative">
-                  <pre className="rounded-lg bg-muted/50 p-3 sm:p-4 text-xs sm:text-sm overflow-x-auto max-w-full">
-                    <code className="text-foreground font-mono whitespace-pre break-all sm:break-normal">
+                <div className="relative overflow-hidden">
+                  <pre className="rounded-lg bg-muted/50 p-3 sm:p-4 text-[10px] sm:text-xs md:text-sm overflow-x-auto">
+                    <code className="text-foreground font-mono whitespace-pre-wrap break-words">
                       {getCodeSnippet(selectedLanguage)}
                     </code>
                   </pre>
@@ -426,10 +426,10 @@ print(result)`
                     </Button>
 
                     {playgroundResult && (
-                      <div>
+                      <div className="overflow-hidden">
                         <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Response</label>
-                        <pre className="rounded-lg bg-muted/50 p-4 text-sm overflow-x-auto max-h-64">
-                          <code className="text-foreground font-mono whitespace-pre">
+                        <pre className="rounded-lg bg-muted/50 p-3 sm:p-4 text-[10px] sm:text-xs md:text-sm overflow-x-auto max-h-64">
+                          <code className="text-foreground font-mono whitespace-pre-wrap break-words">
                             {playgroundResult}
                           </code>
                         </pre>
