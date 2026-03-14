@@ -12,15 +12,18 @@ import {
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import type { ValidationResult, ValidationError } from "@/types/database"
+import { AIAssistant } from "@/components/ai-assistant"
 
 interface ValidationResultsProps {
   result: ValidationResult
+  xmlContent?: string
   onValidateAnother: () => void
   className?: string
 }
 
 export function ValidationResults({
   result,
+  xmlContent,
   onValidateAnother,
   className,
 }: ValidationResultsProps) {
@@ -201,6 +204,14 @@ export function ValidationResults({
           )
         })}
       </div>
+
+      {/* AI Assistant - only show when there are errors and XML content is available */}
+      {!isValid && xmlContent && (
+        <AIAssistant
+          validationResult={result}
+          xmlContent={xmlContent}
+        />
+      )}
 
       {/* Action Button */}
       <div className="flex justify-center pt-2">
