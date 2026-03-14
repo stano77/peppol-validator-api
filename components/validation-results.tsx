@@ -43,14 +43,25 @@ export function ValidationResults({
   // Handle potentially undefined/null values with defaults
   const errorCount = result.error_count ?? 0
   const warningCount = result.warning_count ?? 0
-  const isValid = result.valid === true && errorCount === 0
+  // Derive isValid from error_count since upstream API doesn't return a 'valid' field
+  const isValid = result.valid === true || (typeof result.valid === 'undefined' && errorCount === 0)
 
-  // Debug: log the result structure if it seems malformed
-  if (typeof result.valid === 'undefined' || typeof result.error_count === 'undefined') {
-    console.log("[v0] ValidationResults received malformed result:", JSON.stringify(result, null, 2))
-  }
+  // Get all errors and warnings from the response
+  // The upstream API returns flat 'errors' and 'warnings' arrays, not split by validation type
+  const allErrors = result.errors || result.xsd_errors || []
+  const allWarnings = result.warnings || []
 
-  const sections = [
+  // Combine all issues for display
+  const allIssues = [
+    ...allErrors.map((e: ValidationError | string) => typeof e === 'string' ? { message: e, severity: 'error' as const } : { ...e, severity: 'error' as const }),
+    ...allWarnings.map((w: ValidationError | string) => typeof w === 'string' ? { message: w, severity: 'warning' as const } : { ...w, severity: 'warning' as const }),
+  ]
+
+  // Show combined issues if the API returns flat arrays
+  const hasLegacySplitErrors = result.xsd_errors || result.business_rule_errors || result.schematron_errors
+
+  // Build sections based on response format
+  const sections = hasLegacySplitErrors ? [
     {
       id: "xsd",
       title: "XSD Schema Validation",
@@ -69,7 +80,17 @@ export function ValidationResults({
       errors: result.schematron_errors || [],
       description: "Peppol BIS 3.0 specific validations",
     },
-  ]
+  ] : allIssues.length > 0 ? [
+    {
+      id: "all",
+      title: "Validation Issues",
+      errors: allIssues,
+      description: result.document_type || "All validation checks",
+    },
+  ] : []
+  
+  // Show document type info when valid
+  const documentType = result.document_type
 
   return (
     <div className={cn("flex flex-col gap-6", className)}>
@@ -105,6 +126,11 @@ export function ValidationResults({
             {warningCount} warning
             {warningCount !== 1 ? "s" : ""}
           </p>
+          {documentType && isValid && (
+            <p className="mt-2 text-sm text-muted-foreground">
+              Detected: <span className="font-medium text-foreground">{documentType}</span>
+            </p>
+          )}
         </div>
       </div>
 

@@ -115,7 +115,6 @@ export function LandingContent({
           })
         }
 
-        console.log("[v0] Raw validation response:", JSON.stringify(data, null, 2))
         setValidationResult(data as ValidationResult)
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred")
