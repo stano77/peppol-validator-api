@@ -355,16 +355,16 @@ export function LandingContent({
                     Important Notice
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Please only validate <span className="font-medium text-foreground">test invoices</span>, not real production documents containing sensitive data. 
+                    Please only validate <span className="font-medium text-foreground">test invoices</span>, not real production documents containing sensitive data.
                     The AI assistant uses invoice content to help identify validation errors and suggest fixes.
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Need more than 50 validations per day? Contact us at{" "}
-                    <a 
-                      href="mailto:stanislav.pavlovic1@gmail.com" 
+                    <a
+                      href="mailto:stanislav.pavlovicOne(use digit) and I am using gmail"
                       className="font-medium text-primary hover:underline"
                     >
-                      stanislav.pavlovic1@gmail.com
+                      stanislav.pavlovicOne(use digit) and I am using gmail
                     </a>
                   </p>
                 </div>
