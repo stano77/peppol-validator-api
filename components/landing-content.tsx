@@ -35,6 +35,7 @@ export function LandingContent({
   const [isValidating, setIsValidating] = useState(false)
   const [validationResult, setValidationResult] =
     useState<ValidationResult | null>(null)
+  const [validatedXmlContent, setValidatedXmlContent] = useState<string | null>(null)
   const [quota, setQuota] = useState<QuotaInfo | null>(initialQuota)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -82,9 +83,11 @@ export function LandingContent({
       setIsValidating(true)
       setError(null)
       setValidationResult(null)
+      setValidatedXmlContent(null)
 
       try {
         const content = await file.text()
+        setValidatedXmlContent(content)
         const response = await fetch("/api/v1/validate-ui", {
           method: "POST",
           headers: {
@@ -149,6 +152,7 @@ export function LandingContent({
   const handleValidateAnother = () => {
     setSelectedFile(null)
     setValidationResult(null)
+    setValidatedXmlContent(null)
     setError(null)
   }
 
@@ -271,6 +275,7 @@ export function LandingContent({
               >
                 <ValidationResults
                   result={validationResult}
+                  xmlContent={validatedXmlContent || undefined}
                   onValidateAnother={handleValidateAnother}
                 />
               </motion.div>
