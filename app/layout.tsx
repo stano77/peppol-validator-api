@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "sonner"
+import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/lib/theme-provider"
 import "./globals.css"
 
@@ -190,6 +191,7 @@ export default function RootLayout({
           {children}
           <Toaster position="bottom-right" richColors />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
