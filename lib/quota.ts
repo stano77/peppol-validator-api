@@ -21,7 +21,7 @@ export async function getUserQuota(
   const quota = data[0]
   // SQL function returns out_validations_today and out_daily_limit
   const validationsToday = quota.out_validations_today ?? quota.validations_today ?? 0
-  const dailyLimit = quota.out_daily_limit ?? quota.daily_limit ?? 50
+  const dailyLimit = quota.out_daily_limit ?? quota.daily_limit ?? 5
   return {
     validations_today: validationsToday,
     daily_limit: dailyLimit,
@@ -49,7 +49,7 @@ export async function incrementUserValidation(
   const result = data[0]
   // SQL function returns out_validations_today, out_daily_limit, out_quota_exceeded
   const validationsToday = result.out_validations_today ?? result.validations_today ?? 0
-  const dailyLimit = result.out_daily_limit ?? result.daily_limit ?? 50
+  const dailyLimit = result.out_daily_limit ?? result.daily_limit ?? 5
   const quotaExceeded = result.out_quota_exceeded ?? result.quota_exceeded ?? false
   return {
     quota: {

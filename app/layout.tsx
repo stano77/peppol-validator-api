@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = "https://peppol-validator.eu"
 const siteName = "PEPPOL Validator"
-const siteDescription = "Free PEPPOL invoice validation API with 3-layer validation: UBL 2.1 XSD schema, EN 16931 business rules, and Peppol BIS 3.0 Schematron. REST API for developers. 50 free validations per day."
+const siteDescription = "Free PEPPOL invoice validation API with 3-layer validation: UBL 2.1 XSD schema, EN 16931 business rules, and Peppol BIS 3.0 Schematron. REST API for developers. 5 free validations per day."
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -126,7 +126,7 @@ const jsonLd = {
         "@type": "Offer",
         price: "0",
         priceCurrency: "EUR",
-        description: "Free tier with 50 validations per day"
+        description: "Free tier with 5 validations per day"
       },
       featureList: [
         "UBL 2.1 XSD Schema Validation",
