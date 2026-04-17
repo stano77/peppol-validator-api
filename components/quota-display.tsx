@@ -17,7 +17,7 @@ export function QuotaDisplay({
 }: QuotaDisplayProps) {
   const remaining = Math.max(0, limit - used)
   const percentage = Math.min(100, (used / limit) * 100)
-  const isLow = remaining <= 10
+  const isLow = percentage >= 80
   const isExhausted = remaining === 0
 
   if (variant === "compact") {
@@ -38,7 +38,7 @@ export function QuotaDisplay({
                   ? "bg-amber-500"
                   : "bg-primary"
             )}
-            style={{ width: `${100 - percentage}%` }}
+            style={{ width: `${percentage}%` }}
           />
         </div>
         <span
@@ -51,7 +51,7 @@ export function QuotaDisplay({
                 : "text-muted-foreground"
           )}
         >
-          {remaining}/{limit}
+          {used}/{limit}
         </span>
       </div>
     )
@@ -76,7 +76,7 @@ export function QuotaDisplay({
                 : "text-foreground"
           )}
         >
-          {remaining} of {limit} remaining
+          {used} of {limit} used
         </span>
       </div>
       <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-muted/50">
@@ -89,7 +89,7 @@ export function QuotaDisplay({
                 ? "bg-gradient-to-r from-amber-500 to-amber-400"
                 : "bg-gradient-to-r from-primary to-blue-400"
           )}
-          style={{ width: `${100 - percentage}%` }}
+          style={{ width: `${percentage}%` }}
         />
       </div>
       <p className="text-xs text-muted-foreground/80">
