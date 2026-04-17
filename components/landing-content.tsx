@@ -363,7 +363,19 @@ export function LandingContent({
       {/* Footer */}
       <footer className="relative border-t border-glass-border">
         <div className="glass-subtle py-8">
-          <div className="mx-auto max-w-5xl px-6 flex justify-center">
+          <div className="mx-auto max-w-5xl px-6 flex flex-col items-center gap-5">
+            <div className="text-center text-xs text-muted-foreground">
+              <p className="font-medium text-foreground">Validation rules in use</p>
+              <p className="mt-1.5">
+                Peppol BIS Billing 3.0.20 (Nov 2025) — bundled CEN&nbsp;EN&nbsp;16931 v1.3.15
+              </p>
+              <p>
+                Peppol Self-Billing 3.0.1 (Mar 2026 hotfix) — bundled CEN&nbsp;EN&nbsp;16931 v1.3.13
+              </p>
+              <p className="mt-2 italic">
+                Official, unmodified rule sets published by OpenPeppol and CEN.
+              </p>
+            </div>
             <a
               href="https://github.com/stano77/peppol-validator-api"
               target="_blank"

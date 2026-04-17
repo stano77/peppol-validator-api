@@ -214,13 +214,13 @@ export function ValidationResults({
       )}
 
       {/* Action Button */}
-      <div className="flex justify-center pt-2">
+      <div className="pt-2">
         <Button
+          size="lg"
           onClick={onValidateAnother}
-          variant="outline"
-          className="gap-2 glass-subtle border-glass-border hover:bg-accent"
+          className="w-full gap-2 text-base font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
         >
-          <FileWarning className="h-4 w-4" />
+          <FileWarning className="h-5 w-5" />
           Validate Another Invoice
         </Button>
       </div>
